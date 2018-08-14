@@ -75,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 String poweron_code;
-                int randomnumber;
+                int randomnumber,runingcounts;
+                runingcounts = Integer.parseInt(id_text_runingcounts.getText().toString());
 
-                poweron_code = id_text_randomcode.getText().toString() + "0" + id_text_codenumber.getText().toString() + "0" + id_text_runingcounts.getText().toString();
+                poweron_code = id_text_randomcode.getText().toString() + "0" + id_text_codenumber.getText().toString() + "0" + Integer.toString(runingcounts);
                 randomnumber = Integer.parseInt(id_text_randomcode.getText().toString());
                 //poweron_code = Long.getLong(id_text_randomcode.getText().toString()+"0" + id_text_codenumber.getText().toString()+"0" + id_text_runingcounts.getText().toString());
 
