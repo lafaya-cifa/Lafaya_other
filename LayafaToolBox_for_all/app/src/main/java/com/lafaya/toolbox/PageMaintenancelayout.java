@@ -21,7 +21,7 @@ import static com.lafaya.toolbox.DoorStatus.TYPE_REVOLVINGDOOR;
 public class PageMaintenancelayout {
     private TextView text_maintenance_name,text_maintenance_info;
     private Button button_maintenance_enter,button_maintenance_cancle;
-    private ImageButton button_maintenance_restart,button_maintenance_reset;
+    private ImageButton button_maintenance_restart,button_maintenance_reset,button_maintenance_test;
     private LinearLayout layout_maintenance_button;
     private int selcet_flag = 0;
 
@@ -39,6 +39,8 @@ public class PageMaintenancelayout {
         button_maintenance_enter = (Button)activity.findViewById(R.id.button_maintenance_enter);
         button_maintenance_restart = (ImageButton)activity.findViewById(R.id.button_maintenance_restart);
         button_maintenance_reset = (ImageButton)activity.findViewById(R.id.button_maintenance_reset);
+        button_maintenance_test = (ImageButton)activity.findViewById(R.id.button_maintenance_test);
+
         showMaintenance();
 
         button_maintenance_restart.setOnClickListener(new View.OnClickListener() {
@@ -56,12 +58,23 @@ public class PageMaintenancelayout {
                 selcet_flag = 1;
             }
         });
+
+        button_maintenance_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                testSelected();
+                selcet_flag = 3;
+            }
+        });
+
         button_maintenance_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                selcet_flag = 0;
                 showMaintenance();
             }
         });
+
         button_maintenance_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +122,7 @@ public class PageMaintenancelayout {
         text_maintenance_name.setVisibility(View.VISIBLE);
         button_maintenance_cancle.setVisibility(View.VISIBLE);
         button_maintenance_enter.setVisibility(View.VISIBLE);
+        button_maintenance_enter.setText("确认");
     }
 
     private void resetSelected()
@@ -120,7 +134,26 @@ public class PageMaintenancelayout {
         text_maintenance_name.setVisibility(View.VISIBLE);
         button_maintenance_cancle.setVisibility(View.VISIBLE);
         button_maintenance_enter.setVisibility(View.VISIBLE);
+        button_maintenance_enter.setText("确认");
     }
+
+    private void testSelected()
+    {
+        if(MainActivity.doorStatus.modecheck == 0){
+            MainActivity.doorStatus.testdoor(activity,(char)0x00,false);
+        }else {
+            MainActivity.doorStatus.testdoor(activity,(char)0x00,false);
+        }
+
+        layout_maintenance_button.setVisibility(View.GONE);
+        text_maintenance_name.setText("自动门测试状态");
+        text_maintenance_info.setText(R.string.test_info);
+        text_maintenance_info.setVisibility(View.VISIBLE);
+        text_maintenance_name.setVisibility(View.VISIBLE);
+        button_maintenance_cancle.setVisibility(View.VISIBLE);
+        button_maintenance_enter.setVisibility(View.VISIBLE);
+    }
+
 
     public void resetPorgress(){
         selcet_flag++;
@@ -143,10 +176,10 @@ public class PageMaintenancelayout {
     }
 
     public void resetStart(int flag){
-        selcet_flag = flag;
+        //selcet_flag = flag;
         //发送命令
         if(MainActivity.doorStatus.doortype == TYPE_REVOLVINGDOOR) {
-            MainActivity.doorStatus.doorReset(activity, selcet_flag, activity.getString(R.string.revolingID));
+            MainActivity.doorStatus.doorReset(activity, flag, activity.getString(R.string.revolingID));
             //等待
             showMaintenance();
             if(MainActivity.doorStatus.door_connect) {
@@ -154,7 +187,7 @@ public class PageMaintenancelayout {
                 msg.what = MainActivity.LAYOUTSHOW;
                 Bundle bundle = new Bundle();
                 bundle.putInt("layoutnumber", 9);
-                if (selcet_flag == 1) {
+                if (flag == 1) {
                     bundle.putString("tesxshow", "恢复出厂设置");
                     bundle.putInt("time", 200);
                 } else {
@@ -165,7 +198,42 @@ public class PageMaintenancelayout {
                 handler.sendMessage(msg);
             }
         }else {
-            MainActivity.doorStatus.doorReset(activity, selcet_flag, activity.getString(R.string.automaticdoorID));
+            if(flag < 3){
+                MainActivity.doorStatus.doorReset(activity, flag, activity.getString(R.string.automaticdoorID));
+                selcet_flag = 0;
+                showMaintenance();
+            }else{
+                if(MainActivity.doorStatus.modecheck == 0){
+                    MainActivity.doorStatus.testdoor(activity,(char)0x01,true);
+                }else {
+                    MainActivity.doorStatus.testdoor(activity,(char)0x00,true);
+                }
+            }
+        }
+    }
+    public void updateteststatus(char data){
+        if(data == 0x01){
+            MainActivity.doorStatus.modecheck = 1;
+            text_maintenance_name.setText("自动门测试状态 - 测试中");
+            button_maintenance_enter.setText("退出");
+        }else{
+            MainActivity.doorStatus.modecheck = 0;
+            text_maintenance_name.setText("自动门测试状态 - 未测试");
+            button_maintenance_enter.setText("进入");
+        }
+    }
+
+    public boolean backword(){
+        if(selcet_flag == 0){
+            return true;
+        }else{
+            selcet_flag = 0;
+            return false;
+        }
+    }
+
+    public void UpdateMaintenancelayout(){
+        if(selcet_flag == 0){
             showMaintenance();
         }
     }

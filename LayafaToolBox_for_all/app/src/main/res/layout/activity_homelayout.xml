@@ -250,7 +250,6 @@
                         android:text="——00——"
                         android:textSize="14dp"
                         android:textColor="#9E9E9F"/>
-
                 </LinearLayout>
                 <ImageButton
                     android:id="@+id/button_home_error_info"

@@ -1089,7 +1089,10 @@ public class CommandLafaya {
                 MainActivity.pageParameterlayout.parameterLafaya.ReceiveQuery(Integer.toString((int)data[2]));
             }
         }else if(data[1] == cmd_testmode){//
+            if(data.length >= 3){
+                MainActivity.pageMaintenancelayout.updateteststatus(data[2]);
 
+            }
         }else if(data[1] == cmd_hardwaretest){
             RecieveLafayaHardwaretest(data);
         }else if(data[1] == cmd_monitor){
@@ -1105,7 +1108,34 @@ public class CommandLafaya {
 
     //硬件测试
     private void RecieveLafayaHardwaretest(char[] data){
-
+        /*
+        * 参数字1：0x00，停止监控，0x01平滑门主板监控，0x02平开门主板监控
+        * ！参数字2：无线遥控 （常闭、单向、自动、常开，CAN地址 8,4,2,1） 0b xxxx xxxx
+        * ！参数字3：CAN通讯状态,放电控制、蜂鸣器，继电器，DIP10，DIP9
+        * ！参数字4：拔码开关端口状态 8 -- 1， 0b xxxx xxxx
+        * ！参数字5：外光幕、内光幕、中心定位、电眼、按钮2、按钮2，外微波，内微波，0b xxxx xxxx
+        * ！参数字6：LED输出段码，dp,G,F,E,D,C,B,A，0b xxxx xxxx
+        * ！参数字7：备用输出、电源欠压、复位按键 、电锁反馈、电锁关闭，电锁开启，0b 0xxx 0xxx
+        * ！参数字8：编码器方向，电机过流标志，电机方向，电机类型。 0b 0x0x x00x
+        * ！参数字9：当前温度
+        * ！参数字10：电机电流
+        * 参数字11：
+        * ！参数字12：电机速度
+        * 参数字13：
+        * 参数字14：累计数
+        * 参数字15：
+        * 参数字16：
+        * 参数字17：高四位 - IO_PWM_OUT,IO_IR21362_Fault，IO_485_Control，低四位
+        * 参数字18：当前报警代码
+        * */
+        char[] datatemp = new char[] {0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00, 0x00,0x00,0x00,0x00,0x00};
+        if(data.length >= 19) {
+            int itmp;
+            for (itmp = 0; itmp < 18; itmp++) {
+                datatemp[itmp] = data[itmp + 2];
+            }
+            MainActivity.pageInfolayout.monitorLafayahardware.lafayaShowUpdate(datatemp);
+        }
     }
 
     //软件监控
@@ -1135,9 +1165,6 @@ public class CommandLafaya {
             } else {
                 strtemp += Integer.toString((int) data[23]).toUpperCase();
             }
-
-            MainActivity.pageInfolayout.infoSensorReceive(strtemp);
-
         }
 
     }

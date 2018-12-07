@@ -27,6 +27,7 @@ public class DoorStatus {
     public boolean door_connect = false;
     public int modeselected = 0;
     public int modecurrent = 0;
+    public int modecheck = 0;
     public String error_code = "00";//报警代码
 
     //private String revolving_address = "04";
@@ -203,6 +204,15 @@ public class DoorStatus {
 
         }
 
+    }
+
+
+    public void testdoor(Activity activity,char data,boolean flag){
+        if(flag){
+            MainActivity.bluetoothComm.SendMessage(MainActivity.bluetoothComm.commandLafaya.SendLafayaTestmode(CommandLafaya.sendslidingID,data,true),activity);
+        }else {
+            MainActivity.bluetoothComm.SendMessage(MainActivity.bluetoothComm.commandLafaya.SendLafayaTestmode(CommandLafaya.sendslidingID, data,false),activity);
+        }
     }
 
     //=========复位/

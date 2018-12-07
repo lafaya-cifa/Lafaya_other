@@ -194,40 +194,40 @@
                 android:background="@color/colorBackground"
                 android:visibility="visible"/>
             <LinearLayout
-                android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_hight_layout"
+                android:layout_width="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/button_left_padding"
                 android:layout_gravity="center_vertical">
                 <ImageView
-                    android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/icon_help"
-                    android:layout_gravity="center_vertical"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
                     android:layout_gravity="center_vertical"
-                    android:paddingLeft="25dp"
-                    android:text="帮助"
-                    android:textSize="@dimen/button_text_size"
-                    android:textColor="@color/colorString"/>
-                <RelativeLayout
+                    android:src="@drawable/icon_help"/>
+                <TextView
+                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:paddingLeft="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/colorString"
+                    android:textSize="@dimen/button_text_size"
+                    android:text="帮助"/>
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
                     <ImageButton
                         android:id="@+id/button_menu_help"
-                        android:layout_width="wrap_content"
-                        android:src="@drawable/forward_gray"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="@dimen/button_topbottom_padding"
-                        android:paddingBottom="@dimen/button_topbottom_padding"
-                        android:layout_alignParentRight="true"
                         android:background="@color/transparent"
-                        android:layout_gravity = "center_vertical|right"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:paddingRight="@dimen/button_leftright_padding"
                         android:paddingLeft="@dimen/button_leftright_padding"
-                        android:scaleType="fitCenter" />
+                        android:layout_gravity="center_vertical|right"
+                        android:src="@drawable/forward_gray"
+                        android:layout_alignParentRight="true"
+                        android:paddingBottom="@dimen/button_topbottom_padding"
+                        android:paddingTop="@dimen/button_topbottom_padding"
+                        android:scaleType="fitCenter"/>
                 </RelativeLayout>
             </LinearLayout>
             <View

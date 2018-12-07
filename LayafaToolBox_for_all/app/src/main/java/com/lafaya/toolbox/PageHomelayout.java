@@ -316,7 +316,8 @@ public class PageHomelayout {
         home_check_flag = true;
         home_check_list = 1;
         home_recheck_count = 0;
-        checkstatusprogress.showNow();
+        //checkstatusprogress.showNow();
+
         //发送数据
         //蓝牙开关查询：
         if(MainActivity.doorStatus.doortype == TYPE_SWITCH){
@@ -421,8 +422,12 @@ public class PageHomelayout {
             MainActivity.bluetoothComm.sendwaittime_flag = false;
         }
 
-
         checkstatusprogress.hideNow();
+
+        Message msg = new Message();
+        msg.what = MainActivity.HOME_UPDATE;
+        handler.sendMessage(msg);
+
     }
 
 

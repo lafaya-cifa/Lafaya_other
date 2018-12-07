@@ -1361,7 +1361,7 @@ public class ParameterLafaya {
     }
     // save
     private void parameters_pwm_saving(int datavalue){
-        switch (parameters_distance_statues){
+        switch (parameters_pwm_statues){
             case 1:// speed crawl
                 MainActivity.bluetoothComm.SendMessage(MainActivity.bluetoothComm.commandLafaya.SendLafayaInfoPIDFrequency(CommandLafaya.lafayasend_ID,datavalue,true),activity);
                 break;

@@ -59,14 +59,14 @@
                 android:textSize="@dimen/text_size_device_menu2"
                 android:textColor="@color/colorString"/>
             <com.lafaya.toolbox.AutoCountListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/list_devive_paired"
-                android:footerDividersEnabled="false"
-                android:headerDividersEnabled="false"
-                android:dividerHeight="0dp"
-                android:divider="@null">
-            </com.lafaya.toolbox.AutoCountListView>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_devive_paired"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:dividerHeight="0dp"
+            android:divider="@null">
+        </com.lafaya.toolbox.AutoCountListView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

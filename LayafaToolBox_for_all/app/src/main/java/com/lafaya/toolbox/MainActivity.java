@@ -113,8 +113,11 @@ public class MainActivity extends Activity{
     public final static int HOME_UPDATE = 8;
     public final static int PLC_RESET = 9;
     public final static int COMMUNICATING = 10;
+    public final static int PARA_SET = 11;
 
     public final static int BT_DISCOVERY = 20;
+
+
 
     public final static int POSITION_READ = 66;
     public final static int INFO_CHECK = 77;
@@ -310,7 +313,11 @@ public class MainActivity extends Activity{
 
     private void layoutBackword(){
         //设置下的子菜单，返回设置
-        if((layoutnumber >= LAYOUT_MODESET) && (layoutnumber <= LAYOUT_MAINTENANACE)){
+        if(layoutnumber == LAYOUT_MAINTENANACE){
+            if(pageMaintenancelayout.backword()){
+                layoutnumber = LAYOUT_SETTING;
+            }
+        }else if((layoutnumber >= LAYOUT_MODESET) && (layoutnumber < LAYOUT_MAINTENANACE)){
             layoutnumber = LAYOUT_SETTING;
         }else if((layoutnumber >= 6) && (layoutnumber <= 8)){
             layoutnumber = LAYOUT_MENU;
@@ -403,6 +410,7 @@ public class MainActivity extends Activity{
         pageSettinglayout.UpdateSettinglayout();
         pageHelplayout.UpdataHelplayout(pagenumber);
         pageParameterlayout.UpdateParameterlayout(pagenumber);
+        pageMaintenancelayout.UpdateMaintenancelayout();
 
         pageModesetlayout.updateGride(this,MainActivity.doorStatus.modecurrent);
         if(pagenumber == 6){
@@ -524,6 +532,15 @@ public class MainActivity extends Activity{
         }, time); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
     }
 
+    public  void popupViewonoff(String textstring,boolean flag) {
+        if(flag){
+            view_exit_app.setText(textstring);
+            view_exit_app.setVisibility(View.VISIBLE);
+        }else{
+            view_exit_app.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     //收到其它窗口结束时的返回值
     protected  void onActivityResult(int requestCode, int resultCode,Intent data){
@@ -531,7 +548,8 @@ public class MainActivity extends Activity{
             //蓝牙连接
             if(resultCode == RESULT_OK){
                 //蓝牙连接
-                popupView("正在连接自动门......",1000);
+                popupViewonoff("正在连接自动门......",true);
+                //popupView("正在连接自动门......",4000);
                 bluetoothComm.bluetoothconnect(data,handler,MainActivity.this);
             }
         }
@@ -583,7 +601,10 @@ public class MainActivity extends Activity{
                         doorStatus.door_connect = true;
                     }
 
-                    popupView("自动门已连接，正在加载自动门数据。",2000);
+                    //停止，然后再开启。
+
+                    popupViewonoff("自动门已连接，正在加载自动门数据。",true);
+                    //popupView("自动门已连接，正在加载自动门数据。",4000);
                     layoutUpdate(layoutnumber);
 
                     //初始化化自动门状态
@@ -651,6 +672,7 @@ public class MainActivity extends Activity{
                             }else{
                                 MainActivity.doorStatus.doortype = 0;
                                 pageHomelayout.CleanCheckstatus();
+                                popupViewonoff("",false);
                                 popupView("自动门状态加载失败，请重新连接！",2000);
                                 MainActivity.bluetoothComm.disconectDevice();
 
@@ -658,6 +680,7 @@ public class MainActivity extends Activity{
                         }else {
                             pageInfolayout.infoCommunicationfailure();
                             pageParameterlayout.parameterCommunicationfailure();
+                            popupViewonoff("",false);
                             popupView("通讯失败！",2000);
                         }
 
@@ -667,10 +690,12 @@ public class MainActivity extends Activity{
                     layoutUpdate(layoutnumber);
                     break;
                 case HOME_UPDATE:
+                    popupViewonoff("",false);
+                    popupView("自动门数据加载成功！",1000);
 
                     break;
                 case COMMUNICATING:
-                    popupView("通讯正忙，请稍后再试！",2000);
+                    popupView("通讯正忙，请稍后再试！",1000);
                     break;
                 case POPUP_HIDE://弹出窗口显示
                     view_exit_app.setVisibility(View.GONE);
@@ -686,6 +711,13 @@ public class MainActivity extends Activity{
                     break;
                 case PLC_RESET:
                     doorStatus.doorReset(MainActivity.this,bd.getInt("reset_flag"),getString(R.string.revolingID));
+                    break;
+                case PARA_SET:
+                    if(msg.getData().getBoolean("flag")){
+                        popupView("参数设置完成！",1000);
+                    }else{
+                        popupViewonoff("正在设置参数。",true);
+                    }
                     break;
                 default:
                     break;

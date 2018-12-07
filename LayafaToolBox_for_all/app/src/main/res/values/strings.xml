@@ -25,6 +25,7 @@
 
     <string name="restart_info">系统将重新启动</string>
     <string name="reset_info">系统将恢复出厂设置，所有数据设置的数据将丢失。</string>
+    <string name="test_info">自动门将根据当前的运行模式，自动开启和关闭运行。</string>
 
 
     <string name="automaticdoorID">01</string>

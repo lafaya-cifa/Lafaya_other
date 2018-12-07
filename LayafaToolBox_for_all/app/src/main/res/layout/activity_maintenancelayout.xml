@@ -80,6 +80,44 @@
                     android:scaleType="fitCenter" />
             </RelativeLayout>
         </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:visibility="visible"
+            android:background="@color/colorBackground"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_hight_layout"
+            android:background="#ffff"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/button_left_padding"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="测试模式"
+                android:textSize="@dimen/button_text_size"
+                android:textColor="@color/colorString"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/button_maintenance_test"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/forward_gray"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/button_topbottom_padding"
+                    android:paddingBottom="@dimen/button_topbottom_padding"
+                    android:layout_alignParentRight="true"
+                    android:background="#ffff"
+                    android:layout_gravity = "center_vertical|right"
+                    android:paddingRight="@dimen/button_leftright_padding"
+                    android:paddingLeft="@dimen/button_leftright_padding"
+                    android:scaleType="fitCenter" />
+            </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

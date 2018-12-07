@@ -41,19 +41,9 @@ public class PageInfolayout {
 
     private LinearLayout layout_info_revolving_runtimecurrent,layout_info_leftwing_runtimecurrent,layout_info_rigthwing_runtimecurrent;
     private TextView text_info_sliding_runtimecurrent_name;
-    //sensor
-    private TextView text_info_sensor1,text_info_sensor2,text_info_sensor3,text_info_sensor4,text_info_sensor5,text_info_sensor6;
-    private TextView text_info_sensor7,text_info_sensor8,text_info_sensor9,text_info_sensor10,text_info_sensor11,text_info_sensor12;
-    private TextView text_info_sensor13,text_info_sensor14,text_info_sensor15,text_info_sensor16,text_info_sensor17,text_info_sensor18;
-    private TextView text_info_sensor19,text_info_sensor20;
 
-    //lafaya senso
-    private TextView text_info_la_dip1,text_info_la_dip2,text_info_la_dip3,text_info_la_dip4,text_info_la_dip5,
-            text_info_la_dip6,text_info_la_dip7,text_info_la_dip8,text_info_la_dip9,text_info_la_dip10;
-    private TextView text_info_la_sensor1,text_info_la_sensor2,text_info_la_sensor3,text_info_la_sensor4,
-            text_info_la_sensor5,text_info_la_sensor6,text_info_la_sensor7,text_info_la_sensor8;
+    public  MonitorLafayahardware monitorLafayahardware = new MonitorLafayahardware();
 
-    private char[] lafayasensor_status = new char[]{0x00,0x00};
 
     //error code
 
@@ -119,53 +109,8 @@ public class PageInfolayout {
         layout_info_rigthwing_runtimecurrent = (LinearLayout)activity.findViewById(R.id.layout_info_rigthwing_runtimecurrent);
         text_info_sliding_runtimecurrent_name = (TextView)activity.findViewById(R.id.text_info_sliding_runtimecurrent_name);
 
-        //sensor
-        text_info_sensor1 = (TextView)activity.findViewById(R.id.text_info_sensor1);
-        text_info_sensor2 = (TextView)activity.findViewById(R.id.text_info_sensor2);
-        text_info_sensor3 = (TextView)activity.findViewById(R.id.text_info_sensor3);
-        text_info_sensor4 = (TextView)activity.findViewById(R.id.text_info_sensor4);
-        text_info_sensor5 = (TextView)activity.findViewById(R.id.text_info_sensor5);
-        text_info_sensor6 = (TextView)activity.findViewById(R.id.text_info_sensor6);
-        text_info_sensor7 = (TextView)activity.findViewById(R.id.text_info_sensor7);
-        text_info_sensor8 = (TextView)activity.findViewById(R.id.text_info_sensor8);
-        text_info_sensor9 = (TextView)activity.findViewById(R.id.text_info_sensor9);
-        text_info_sensor10 = (TextView)activity.findViewById(R.id.text_info_sensor10);
-        text_info_sensor11 = (TextView)activity.findViewById(R.id.text_info_sensor11);
-        text_info_sensor12 = (TextView)activity.findViewById(R.id.text_info_sensor12);
-        text_info_sensor13 = (TextView)activity.findViewById(R.id.text_info_sensor13);
-        text_info_sensor14 = (TextView)activity.findViewById(R.id.text_info_sensor14);
-        text_info_sensor15 = (TextView)activity.findViewById(R.id.text_info_sensor15);
-        text_info_sensor16 = (TextView)activity.findViewById(R.id.text_info_sensor16);
-        text_info_sensor17 = (TextView)activity.findViewById(R.id.text_info_sensor17);
-        text_info_sensor18 = (TextView)activity.findViewById(R.id.text_info_sensor18);
-        text_info_sensor19 = (TextView)activity.findViewById(R.id.text_info_sensor19);
-        text_info_sensor20 = (TextView)activity.findViewById(R.id.text_info_sensor20);
-        sensormobileShwoUpdate("000000000000");
-        sensorfixedShwoUpdate("00000000");
 
-        //lafaya sensor
-        text_info_la_dip1 = (TextView)activity.findViewById(R.id.text_info_la_dip1);
-        text_info_la_dip2 = (TextView)activity.findViewById(R.id.text_info_la_dip2);
-        text_info_la_dip3 = (TextView)activity.findViewById(R.id.text_info_la_dip3);
-        text_info_la_dip4 = (TextView)activity.findViewById(R.id.text_info_la_dip4);
-        text_info_la_dip5 = (TextView)activity.findViewById(R.id.text_info_la_dip5);
-        text_info_la_dip6 = (TextView)activity.findViewById(R.id.text_info_la_dip6);
-        text_info_la_dip7 = (TextView)activity.findViewById(R.id.text_info_la_dip7);
-        text_info_la_dip8 = (TextView)activity.findViewById(R.id.text_info_la_dip8);
-        text_info_la_dip9 = (TextView)activity.findViewById(R.id.text_info_la_dip9);
-        text_info_la_dip10 = (TextView)activity.findViewById(R.id.text_info_la_dip10);
-
-        text_info_la_sensor1 = (TextView)activity.findViewById(R.id.text_info_la_sensor1);
-        text_info_la_sensor2 = (TextView)activity.findViewById(R.id.text_info_la_sensor2);
-        text_info_la_sensor3 = (TextView)activity.findViewById(R.id.text_info_la_sensor3);
-        text_info_la_sensor4 = (TextView)activity.findViewById(R.id.text_info_la_sensor4);
-        text_info_la_sensor5 = (TextView)activity.findViewById(R.id.text_info_la_sensor5);
-        text_info_la_sensor6 = (TextView)activity.findViewById(R.id.text_info_la_sensor6);
-        text_info_la_sensor7 = (TextView)activity.findViewById(R.id.text_info_la_sensor7);
-        text_info_la_sensor8 = (TextView)activity.findViewById(R.id.text_info_la_sensor8);
-
-        sensorlafayaShowUpdate(lafayasensor_status);
-
+        monitorLafayahardware.initializeTextView(activity);
 
         //error code
         list_info_errorcode = (AutoCountListView)activity.findViewById(R.id.list_info_errorcode);
@@ -250,7 +195,7 @@ public class PageInfolayout {
                     info_layout_flag = 0;
                     info_update_check = 0;
                     if(!(MainActivity.doorStatus.doortype == TYPE_REVOLVINGDOOR)){
-                        MainActivity.bluetoothComm.SendMessage(MainActivity.bluetoothComm.commandLafaya.SendLafayaMonitor(CommandLafaya.sendrightwingID, 0), activity);
+                        MainActivity.bluetoothComm.SendMessage(MainActivity.bluetoothComm.commandLafaya.SendLafayaHardwareTest(CommandLafaya.sendrightwingID, (char)0x00), activity);
                     }
                     if(info_checked){
                         infocheckTimer.cancel();
@@ -265,7 +210,7 @@ public class PageInfolayout {
                         if(MainActivity.doorStatus.doortype == TYPE_REVOLVINGDOOR) {
                             MainActivity.doorStatus.readSensorStatus(activity, true);
                         }else {
-                            MainActivity.bluetoothComm.SendMessage(MainActivity.bluetoothComm.commandLafaya.SendLafayaMonitor(CommandLafaya.sendrightwingID, 1), activity);
+                            MainActivity.bluetoothComm.SendMessage(MainActivity.bluetoothComm.commandLafaya.SendLafayaHardwareTest(CommandLafaya.sendrightwingID, (char)0x01), activity);
                         }
                     }
                 }else {
@@ -468,12 +413,11 @@ public class PageInfolayout {
         text_info_rigthwing_runtimehistory.setText("0" + "次");
 
         if(MainActivity.doorStatus.doortype == TYPE_REVOLVINGDOOR){
-            sensormobileShwoUpdate("000000000000");
-            sensorfixedShwoUpdate("00000000");
+
+            monitorLafayahardware.sensormobileShwoUpdate("000000000000");
+            monitorLafayahardware.sensorfixedShwoUpdate("00000000");
         }else {
-            lafayasensor_status[0] = 0x00;
-            lafayasensor_status[1] = 0x00;
-            sensorlafayaShowUpdate(lafayasensor_status);
+            monitorLafayahardware.lafayaShowUpdate(monitorLafayahardware.lafayasensor_status);
         }
 
         if(MainActivity.doorStatus.doortype == TYPE_REVOLVINGDOOR) {
@@ -542,293 +486,6 @@ public class PageInfolayout {
                 break;
             default:
                 break;
-        }
-    }
-
-//传感器状态显示，每隔2秒就查询一次
-    public void sensorfixedShwoUpdate(String textstring){
-        if(textstring.substring(textstring.length()-1,textstring.length()).equals("0")){
-            text_info_sensor10.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor10.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor10.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor10.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-2,textstring.length()-1).equals("0")){
-            text_info_sensor9.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor9.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor9.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor9.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-3,textstring.length()-2).equals("0")){
-            text_info_sensor8.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor8.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor8.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor8.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-4,textstring.length()-3).equals("0")){
-            text_info_sensor7.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor7.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor7.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor7.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-5,textstring.length()-4).equals("0")){
-            text_info_sensor6.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor6.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor6.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor6.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if(textstring.substring(textstring.length()-6,textstring.length()-5).equals("0")){
-            text_info_sensor5.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor5.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor5.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor5.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-7,textstring.length()-6).equals("0")){
-            text_info_sensor4.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor4.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor4.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor4.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-8,textstring.length()-7).equals("0")){
-            text_info_sensor3.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor3.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor3.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor3.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-    }
-    public void sensormobileShwoUpdate(String textstring){
-        if(textstring.substring(textstring.length()-1,textstring.length()).equals("0")){
-            text_info_sensor20.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor20.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor20.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor20.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-2,textstring.length()-1).equals("0")){
-            text_info_sensor19.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor19.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor19.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor19.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-3,textstring.length()-2).equals("0")){
-            text_info_sensor18.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor18.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor18.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor18.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-4,textstring.length()-3).equals("0")){
-            text_info_sensor17.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor17.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor17.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor17.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-5,textstring.length()-4).equals("0")){
-            text_info_sensor2.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor2.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor2.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor2.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if(textstring.substring(textstring.length()-6,textstring.length()-5).equals("0")){
-            text_info_sensor1.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor1.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor1.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor1.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-7,textstring.length()-6).equals("0")){
-            text_info_sensor16.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor16.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor16.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor16.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-
-        if(textstring.substring(textstring.length()-8,textstring.length()-7).equals("0")){
-            text_info_sensor15.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor15.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor15.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor15.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if(textstring.substring(textstring.length()-9,textstring.length()-8).equals("0")){
-            text_info_sensor14.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor14.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor14.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor14.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if(textstring.substring(textstring.length()-10,textstring.length()-9).equals("0")){
-            text_info_sensor13.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor13.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor13.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor13.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if(textstring.substring(textstring.length()-11,textstring.length()-10).equals("0")){
-            text_info_sensor12.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor12.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor12.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor12.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if(textstring.substring(textstring.length()-12,textstring.length()-11).equals("0")){
-            text_info_sensor11.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_sensor11.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_sensor11.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_sensor11.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-    }
-
-    public void sensorlafayaShowUpdate(char[] sensorstatus){
-        if((sensorstatus[0] & 0x01) == 0x01){
-            text_info_la_dip1.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip1.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip1.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip1.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[0] & 0x02) == 0x02){
-            text_info_la_dip2.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip2.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip2.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip2.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[0] & 0x04) == 0x04){
-            text_info_la_dip3.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip3.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip3.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip3.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[0] & 0x08) == 0x08){
-            text_info_la_dip4.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip4.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip4.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip4.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[0] & 0x10) == 0x10){
-            text_info_la_dip5.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip5.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip5.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip5.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[0] & 0x20) == 0x20){
-            text_info_la_dip6.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip6.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip6.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip6.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[0] & 0x40) == 0x40){
-            text_info_la_dip7.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip7.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip7.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip7.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[0] & 0x80) == 0x80){
-            text_info_la_dip8.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip8.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_dip8.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_dip8.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-//        if(textstring.substring(textstring.length()-8,textstring.length()-7).equals("0")){
-            text_info_la_dip9.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip9.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
- //       }else {
- //           text_info_la_dip9.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
- //           text_info_la_dip9.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-  //      }
-//        if(textstring.substring(textstring.length()-8,textstring.length()-7).equals("0")){
-            text_info_la_dip10.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_dip10.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
- //       }else {
-  //          text_info_la_dip10.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-  //          text_info_la_dip10.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-  //      }
-        if((sensorstatus[1] & 0x40) == 0x40){
-            text_info_la_sensor1.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor1.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor1.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor1.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[1] & 0x80) == 0x80){
-            text_info_la_sensor2.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor2.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor2.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor2.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[1] & 0x10) == 0x10){
-            text_info_la_sensor3.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor3.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor3.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor3.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[1] & 0x08) == 0x08){
-            text_info_la_sensor4.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor4.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor4.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor4.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[1] & 0x20) == 0x20){
-            text_info_la_sensor5.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor5.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor5.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor5.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[1] & 0x04) == 0x04){
-            text_info_la_sensor6.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor6.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor6.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor6.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[1] & 0x02) == 0x02){
-            text_info_la_sensor7.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor7.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor7.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor7.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
-        }
-        if((sensorstatus[1] & 0x01) == 0x01){
-            text_info_la_sensor8.setTextColor(activity.getResources().getColor(R.color.colorString));
-            text_info_la_sensor8.setBackgroundColor(activity.getResources().getColor(R.color.colorSensor));
-        }else {
-            text_info_la_sensor8.setTextColor(activity.getResources().getColor(R.color.colorStringWhite));
-            text_info_la_sensor8.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
         }
     }
 
@@ -978,12 +635,12 @@ public class PageInfolayout {
         if(MainActivity.doorStatus.doortype == TYPE_REVOLVINGDOOR) {
             switch (info_update_check) {
                 case 1://固定部分
-                    sensorfixedShwoUpdate(textstring);
+                    monitorLafayahardware.sensorfixedShwoUpdate(textstring);
                     info_update_check = 2;
                     MainActivity.doorStatus.readSensorStatus(activity, false);
                     break;
                 case 2://移动部分
-                    sensormobileShwoUpdate(textstring);
+                    monitorLafayahardware.sensormobileShwoUpdate(textstring);
                     info_update_check = 0;
                     infoCheckStart();
                     break;
@@ -991,8 +648,8 @@ public class PageInfolayout {
                     break;
             }
         }else {
-            lafayasensor_status = sensorstatus_check(textstring);
-            sensorlafayaShowUpdate(lafayasensor_status);
+
+            monitorLafayahardware.lafayaShowUpdate(monitorstatus_check(textstring));
         }
     }
 
@@ -1007,7 +664,7 @@ public class PageInfolayout {
         }
     }
 
-    private char[] sensorstatus_check(String textstring){
+    private char[] monitorstatus_check(String textstring){
         char[] tempstatus = new char[]{0x00,0x00};
         char temp[];
         temp = IntegertoChar(Integer.parseInt(textstring.substring(1,2)));

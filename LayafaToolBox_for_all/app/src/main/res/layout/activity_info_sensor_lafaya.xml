@@ -6,7 +6,51 @@
     android:visibility="invisible"
     android:background="@color/colorBackground">
 
-    <!-- DIP开关-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="start"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="控制器型号:"
+        android:textSize="12dp"
+        android:textColor="@color/colorString"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="LACS-03"
+            android:textSize="12dp"
+            android:id="@+id/text_info_la_hardwaretype"
+            android:textColor="@color/colorString"
+            />
+    </LinearLayout>
+
+    <!-- 电路状态 -->
+        <!-- 拨码开关 DIP1 ~ DIP0（参数4，3），LED(参数6) ，蜂鸣器、继电器-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:text="外设接口状态"
+        android:textSize="12dp"
+        android:textColor="@color/colorString"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,10 +64,505 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP1"
+            android:text="开门开关"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor1"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="紧急开关"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor2"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="内传感器"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor3"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="外传感器"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor4"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="安全传感器"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor5"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="内安全光幕"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor6"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="外安全光幕"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor7"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="备用输入"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_sensor8"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="使能状态"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_enable"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="锁状态-开"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_lock1"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="开锁指令"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_lock2"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="闭锁指令"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_lock3"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:text="遥控接口状态"
+        android:textSize="12dp"
+        android:textColor="@color/colorString"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="常闭-K1"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_remote1"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="常开-K2"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_remote2"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="自动-K3"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_remote3"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="单向-K4"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_remote4"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:text="电机驱动状态"
+        android:textSize="12dp"
+        android:textColor="@color/colorString"
+        />
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal"
+    android:gravity="center"
+    android:layout_marginLeft="@dimen/button_left_padding"
+    android:layout_marginRight="@dimen/button_left_padding"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+    <LinearLayout
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="left"
+        android:gravity="left"
+        android:background="#ffff">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center"
+            android:text="电机转速："
+            android:textSize="10dp"
+            android:textColor="@color/colorString"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="left"
+            android:text="0"
+            android:textSize="10dp"
+            android:id="@+id/text_info_la_motorspeed"
+            android:textColor="@color/colorString"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center"
+            android:text="转/分"
+            android:textSize="10dp"
+            android:textColor="@color/colorString"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:background="#ffff">
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center"
+            android:text="电机电流："
+            android:textSize="10dp"
+            android:textColor="@color/colorString"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="left"
+            android:text="0"
+            android:textSize="10dp"
+            android:id="@+id/text_info_la_motorcurrent"
+            android:textColor="@color/colorString"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center"
+            android:text="mA"
+            android:textSize="10dp"
+            android:textColor="@color/colorString"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <LinearLayout
+            android:layout_width="153dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:background="#ffff">
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center"
+                android:text="驱动温度："
+                android:textSize="10dp"
+                android:textColor="@color/colorString"/>
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="left"
+                android:text="0"
+                android:textSize="10dp"
+                android:id="@+id/text_info_la_drivetemp"
+                android:textColor="@color/colorString"/>
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:gravity="center"
+                android:text="度"
+                android:textSize="10dp"
+                android:textColor="@color/colorString"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            android:gravity="right">
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="76dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="电机方向-正"
+                android:textSize="10dp"
+                android:layout_marginLeft="2dp"
+                android:id="@+id/text_info_la_motordir"
+                android:textColor="#ffff"
+                android:background="@color/colorPrimary"/>
+            <TextView
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_width="76dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="电机类型-有刷"
+                android:textSize="10dp"
+                android:layout_marginLeft="2dp"
+                android:id="@+id/text_info_la_motortype"
+                android:textColor="#ffff"
+                android:background="@color/colorPrimary"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="编码方向-正"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_encodedir"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="驱动过载"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_overload"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="驱动故障"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_driveerror"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="驱动使能"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_driveenable"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+
+    <!-- DIP开关-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:text="拔码开关状态"
+        android:textSize="12dp"
+        android:textColor="@color/colorString"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="29dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="1"
             android:textSize="10dp"
             android:id="@+id/text_info_la_dip1"
             android:textColor="#ffff"
@@ -31,10 +570,10 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP2"
+            android:text="2"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip2"
@@ -43,10 +582,10 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP3"
+            android:text="3"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip3"
@@ -55,10 +594,10 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP4"
+            android:text="4"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip4"
@@ -67,45 +606,34 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP5"
+            android:text="5"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip5"
             android:textColor="#ffff"
             android:background="@color/colorPrimary"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_marginLeft="@dimen/button_left_padding"
-        android:layout_marginRight="@dimen/button_left_padding"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP6"
+            android:text="6"
             android:textSize="10dp"
+            android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip6"
             android:textColor="#ffff"
             android:background="@color/colorPrimary"/>
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP7"
+            android:text="7"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip7"
@@ -114,10 +642,10 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP8"
+            android:text="8"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip8"
@@ -126,10 +654,10 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP9"
+            android:text="9"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip9"
@@ -138,17 +666,27 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="60dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="DIP10"
+            android:text="10"
             android:textSize="10dp"
             android:layout_marginLeft="2dp"
             android:id="@+id/text_info_la_dip10"
             android:textColor="#ffff"
             android:background="@color/colorPrimary"/>
     </LinearLayout>
-    <!-- 端口信号-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:text="数码管状态"
+        android:textSize="12dp"
+        android:textColor="@color/colorString"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -162,28 +700,110 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="150dp"
+            android:layout_width="37dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="室内传感器"
+            android:text="A"
             android:textSize="10dp"
-            android:id="@+id/text_info_la_sensor1"
+            android:id="@+id/text_info_la_LEDA"
             android:textColor="#ffff"
             android:background="@color/colorPrimary"/>
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="室外传感器"
-            android:textSize="10dp"
             android:paddingTop="5dp"
-            android:id="@+id/text_info_la_sensor2"
             android:paddingBottom="5dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/colorString"
-            android:background="@color/colorSensor"/>
+            android:text="B"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_LEDB"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="C"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_LEDC"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="D"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_LEDD"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="E"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_LEDE"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="F"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_LEDF"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="G"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_LEDG"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="37dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="DP"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_LEDDP"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:text="其它状态"
+        android:textSize="12dp"
+        android:textColor="@color/colorString"
+        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -197,97 +817,119 @@
         <TextView
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:layout_width="150dp"
+            android:layout_width="76dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="开门开关"
+            android:text="开门状态"
             android:textSize="10dp"
-            android:id="@+id/text_info_la_sensor3"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_dooropen"
             android:textColor="#ffff"
             android:background="@color/colorPrimary"/>
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="紧急开关"
-            android:textSize="10dp"
             android:paddingTop="5dp"
-            android:id="@+id/text_info_la_sensor4"
             android:paddingBottom="5dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/colorString"
-            android:background="@color/colorSensor"/>
+            android:text="故障状态"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_doorerror"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="电源欠压"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_powerlow"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="备用电源"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_standby"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/button_left_padding"
+        android:layout_marginRight="@dimen/button_left_padding"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="复位按键"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_resetkey"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="蜂鸣器"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_bee"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="联动状态"
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"
+            android:id="@+id/text_info_la_canlink"
+            android:textColor="#ffff"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_width="76dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text=" "
+            android:textSize="10dp"
+            android:layout_marginLeft="2dp"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_marginLeft="@dimen/button_left_padding"
-        android:layout_marginRight="@dimen/button_left_padding"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
-        <TextView
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="安全传感器"
-            android:textSize="10dp"
-            android:id="@+id/text_info_la_sensor5"
-            android:textColor="#ffff"
-            android:background="@color/colorPrimary"/>
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="电锁反馈"
-            android:textSize="10dp"
-            android:paddingTop="5dp"
-            android:id="@+id/text_info_la_sensor6"
-            android:paddingBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:textColor="@color/colorString"
-            android:background="@color/colorSensor"/>
-    </LinearLayout>
+    <!-- 蜂鸣器、继电器、电锁反馈，开锁指令，闭锁指令-->
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_marginLeft="@dimen/button_left_padding"
-        android:layout_marginRight="@dimen/button_left_padding"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
-        <TextView
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="市电失电"
-            android:textSize="10dp"
-            android:id="@+id/text_info_la_sensor7"
-            android:textColor="#ffff"
-            android:background="@color/colorPrimary"/>
-        <TextView
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="复位按钮"
-            android:textSize="10dp"
-            android:paddingTop="5dp"
-            android:id="@+id/text_info_la_sensor8"
-            android:paddingBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:textColor="@color/colorString"
-            android:background="@color/colorSensor"/>
-    </LinearLayout>
+    <!-- 电机状态 速度（参数12、13）、电流（参数10，11）、温度（参数9）、（参数8）方向、类型、编码方向、过载-->
+
+
+    <!-- 外设状态 参数5,参数7（使能） -->
+
+
+    <!-- 电锁状态 参数7 low，电锁反馈，开锁指令，闭锁指令 -->
+
 
     <!-- 当前温度-->
 

@@ -1,12 +1,16 @@
 package com.lafaya.toolbox;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -404,6 +408,9 @@ public class PageParameterlayout {
             MainActivity.pageParameterlayout.parameterLafaya.slidingdoor_check_status = 0;
         }
 
+        InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(edittext_parameter_setnew.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+
         parameter_dialog(false," ",0,0,0,0);
         modify_flag = false;
         operation_control(true);
@@ -423,23 +430,27 @@ public class PageParameterlayout {
                 break;
             case SLIDINGDOOR_SHOW://sliding door parameters saving
                 parameterLafaya.parameterLafaya_Saving(edittext_parameter_setnew.getText().toString());
-                setbutton_enable(false);
+                //setbutton_enable(false);
                 break;
             case WINGLEFT_SHOW://
                 parameterLafaya.parameterLafaya_Saving(edittext_parameter_setnew.getText().toString());
-                setbutton_enable(false);
+                //setbutton_enable(false);
                 break;
             case WINGRIGHT_SHOW:
                 parameterLafaya.parameterLafaya_Saving(edittext_parameter_setnew.getText().toString());
-                setbutton_enable(false);
+                //setbutton_enable(false);
                 break;
             case VFD_SHOW:
                 parameterVFD.parameterVFD_saving(edittext_parameter_setnew.getText().toString());
-                setbutton_enable(false);
+                //setbutton_enable(false);
                 break;
             default:
-                break;
+                return;
         }
+        //关闭参数设置窗口和数字键盘，显示参数设置中。
+        InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(edittext_parameter_setnew.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+        parameter_set_status(false);
     }
 
     public void setbutton_text(String text){
@@ -476,7 +487,9 @@ public class PageParameterlayout {
         }else if(flag == SLIDINGDOOR_SHOW){
             parameterLafaya.Receivesetfinished();
         }
-        parameter_dialog(false,"--",0,0,0,1);
+        //参数设置完成/
+        parameter_set_status(true);
+        //parameter_dialog(false,"--",0,0,0,1);
         modify_flag = false;
         operation_control(true);
         updateLayout();
@@ -590,17 +603,28 @@ public class PageParameterlayout {
 
         if(flag){
             modify_flag = true;
-            relativelayout_parameter_set.setVisibility(View.VISIBLE);
+
             layout_parameter_all.setEnabled(false);
             operation_control(false);
             text_parameter_settitle.setText(name);
             text_parameter_setold.setText(Integer.toString(nowv));
+
+            //显示数字键盘及光标
             edittext_parameter_setnew.setText(Integer.toString(nowv));
+            edittext_parameter_setnew.setFocusable(true);
+            edittext_parameter_setnew.setFocusableInTouchMode(true);
+            edittext_parameter_setnew.requestFocus();
+            InputMethodManager inputManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.showSoftInput(edittext_parameter_setnew, 0);
+
             seekbar_parameter_set.setMax((int)((dialog_maxvalue - dialog_minvalue)/dialog_step));
             seekbar_parameter_set.setProgress((int)((nowv - dialog_minvalue)/dialog_step));
             layout_parameter_dialog.setVisibility(View.VISIBLE);
+            relativelayout_parameter_set.setVisibility(View.VISIBLE);
+
         }else {
             layout_parameter_dialog.setVisibility(View.GONE);
+            relativelayout_parameter_set.setVisibility(View.GONE);
         }
 
         setbutton_enable(true);
@@ -639,6 +663,18 @@ public class PageParameterlayout {
 
     public void resetParameterlayout(){
 
+    }
+
+    //参数设置显示状态
+    private void parameter_set_status(boolean flag){
+
+        parameter_dialog(false,"--",0,0,0,1);
+        Message msg = new Message();
+        msg.what = MainActivity.PARA_SET;
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("flag",flag);
+        msg.setData(bundle);
+        handler.sendMessage(msg);
     }
 
 
